@@ -1,0 +1,86 @@
+<div class="container py-5">
+  <h1 class="mb-5">Events</h1>
+
+  <div class="tabs mb-4">
+    <button
+      class="btn"
+      [ngClass]="{ 'btn-primary': activeTab === 'upcoming', 'btn-outline-primary': activeTab !== 'upcoming' }"
+      (click)="setActiveTab('upcoming')"
+    >
+      Upcoming Events ({{ upcomingEvents.length }})
+    </button>
+    <button
+      class="btn ms-2"
+      [ngClass]="{ 'btn-primary': activeTab === 'past', 'btn-outline-primary': activeTab !== 'past' }"
+      (click)="setActiveTab('past')"
+    >
+      Past Events ({{ pastEvents.length }})
+    </button>
+  </div>
+
+  <div *ngIf="activeTab === 'upcoming'" class="events-list">
+    <p class="text-muted" *ngIf="upcomingEvents.length === 0">No upcoming events at this time.</p>
+
+    <div class="event-card mb-4" *ngFor="let event of upcomingEvents">
+      <div class="card h-100 border-0 shadow-sm">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img *ngIf="event.image" [src]="event.image" alt="{{ event.title }}" class="img-fluid rounded-start event-image">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{ event.title }}</h5>
+              <p class="card-text">{{ event.description }}</p>
+
+              <div class="event-details">
+                <div class="detail-item mb-2">
+                  <i class="bi bi-calendar-event"></i>
+                  <strong>{{ formatDate(event.date) }}</strong>
+                </div>
+                <div class="detail-item">
+                  <i class="bi bi-geo-alt"></i>
+                  <strong>{{ event.location }}</strong>
+                </div>
+              </div>
+
+              <div class="badge bg-success mt-3">Upcoming</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="activeTab === 'past'" class="events-list">
+    <p class="text-muted" *ngIf="pastEvents.length === 0">No past events to display.</p>
+
+    <div class="event-card mb-4" *ngFor="let event of pastEvents">
+      <div class="card h-100 border-0 shadow-sm opacity-85">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img *ngIf="event.image" [src]="event.image" alt="{{ event.title }}" class="img-fluid rounded-start event-image">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{ event.title }}</h5>
+              <p class="card-text">{{ event.description }}</p>
+
+              <div class="event-details">
+                <div class="detail-item mb-2">
+                  <i class="bi bi-calendar-event"></i>
+                  <strong>{{ formatDate(event.date) }}</strong>
+                </div>
+                <div class="detail-item">
+                  <i class="bi bi-geo-alt"></i>
+                  <strong>{{ event.location }}</strong>
+                </div>
+              </div>
+
+              <div class="badge bg-secondary mt-3">Past Event</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

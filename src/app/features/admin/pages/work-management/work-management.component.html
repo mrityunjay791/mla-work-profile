@@ -1,0 +1,46 @@
+<div class="container py-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Manage Works</h1>
+    <button class="btn btn-primary" (click)="onAddClick()" *ngIf="!showForm">
+      + Add New Work
+    </button>
+  </div>
+
+  <div *ngIf="showForm" class="card border-0 shadow-sm mb-5">
+    <div class="card-body">
+      <h4 class="mb-4">{{ editingWork ? 'Edit Work' : 'Add New Work' }}</h4>
+      <app-work-form [work]="editingWork" (submit)="onFormSubmit($event)" (cancel)="onFormCancel()"></app-work-form>
+    </div>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead class="table-light">
+        <tr>
+          <th>Title</th>
+          <th>Category</th>
+          <th>Date</th>
+          <th>Impact</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let work of works">
+          <td>{{ work.title }}</td>
+          <td><span class="badge bg-primary">{{ work.category }}</span></td>
+          <td>{{ formatDate(work.date) }}</td>
+          <td class="text-truncate" [title]="work.impact">{{ work.impact }}</td>
+          <td>
+            <button class="btn btn-sm btn-outline-primary me-2" (click)="onEditClick(work)">
+              Edit
+            </button>
+            <button class="btn btn-sm btn-outline-danger" (click)="onDelete(work.id)">
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p *ngIf="works.length === 0" class="text-muted text-center py-5">No works found. Add a new work to get started.</p>
+  </div>
+</div>

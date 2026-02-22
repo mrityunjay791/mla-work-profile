@@ -1,0 +1,68 @@
+.work-detail {
+  .detail-header {
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 1.5rem;
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 1rem;
+    }
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #333;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 0.5rem;
+  }
+
+  .impact-box {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+
+    p {
+      color: white;
+    }
+  }
+
+  .info-card {
+    border: 1px solid #dee2e6;
+
+    h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #333;
+    }
+
+    strong {
+      color: #333;
+    }
+
+    .badge {
+      padding: 0.5rem 0.75rem;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .work-detail {
+    .detail-header h1 {
+      font-size: 1.8rem;
+    }
+
+    .section-title {
+      font-size: 1.2rem;
+    }
+
+    .info-card {
+      margin-top: 2rem;
+      position: static !important;
+    }
+  }
+}

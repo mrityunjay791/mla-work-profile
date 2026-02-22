@@ -1,0 +1,53 @@
+<div class="container py-5">
+  <a routerLink="/work" class="btn btn-outline-primary mb-4">← Back to Works</a>
+
+  <div *ngIf="notFound" class="alert alert-warning">
+    <p>Work not found.</p>
+  </div>
+
+  <div *ngIf="work" class="work-detail">
+    <div class="row mb-5">
+      <div class="col-lg-8">
+        <div class="detail-header mb-4">
+          <h1>{{ work.title }}</h1>
+          <span class="badge bg-primary me-3">{{ work.category }}</span>
+          <small class="text-muted">{{ formatDate(work.date) }}</small>
+        </div>
+
+        <div class="card border-0 shadow-sm">
+          <div class="card-body">
+            <h2 class="section-title">Description</h2>
+            <p class="lead">{{ work.description }}</p>
+
+            <h2 class="section-title">Details</h2>
+            <p>{{ work.details }}</p>
+
+            <h2 class="section-title">Impact</h2>
+            <div class="impact-box p-4 rounded">
+              <p class="lead mb-0">{{ work.impact }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="info-card p-4 bg-light rounded sticky-top">
+          <h3>Work Information</h3>
+          <hr>
+          <p class="mb-3">
+            <strong>Category:</strong><br>
+            <span class="badge bg-secondary">{{ work.category }}</span>
+          </p>
+          <p class="mb-3">
+            <strong>Date:</strong><br>
+            {{ formatDate(work.date) }}
+          </p>
+          <p class="mb-0">
+            <strong>Title:</strong><br>
+            {{ work.title }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

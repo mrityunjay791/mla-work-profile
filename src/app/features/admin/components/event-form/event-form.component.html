@@ -1,0 +1,92 @@
+<form [formGroup]="eventForm" (ngSubmit)="onSubmit()" class="event-form">
+  <div class="mb-3">
+    <label for="title" class="form-label">Title *</label>
+    <input
+      type="text"
+      class="form-control"
+      id="title"
+      formControlName="title"
+      [ngClass]="{ 'is-invalid': submitted && f['title'].errors }"
+    >
+    <div *ngIf="submitted && f['title'].errors" class="invalid-feedback">
+      Title is required
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="description" class="form-label">Description *</label>
+    <textarea
+      class="form-control"
+      id="description"
+      rows="3"
+      formControlName="description"
+      [ngClass]="{ 'is-invalid': submitted && f['description'].errors }"
+    ></textarea>
+    <div *ngIf="submitted && f['description'].errors" class="invalid-feedback">
+      Description is required
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label for="date" class="form-label">Date *</label>
+      <input
+        type="date"
+        class="form-control"
+        id="date"
+        formControlName="date"
+        [ngClass]="{ 'is-invalid': submitted && f['date'].errors }"
+      >
+      <div *ngIf="submitted && f['date'].errors" class="invalid-feedback">
+        Date is required
+      </div>
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <label for="type" class="form-label">Type *</label>
+      <select
+        class="form-select"
+        id="type"
+        formControlName="type"
+        [ngClass]="{ 'is-invalid': submitted && f['type'].errors }"
+      >
+        <option value="upcoming">Upcoming</option>
+        <option value="past">Past</option>
+      </select>
+      <div *ngIf="submitted && f['type'].errors" class="invalid-feedback">
+        Type is required
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="location" class="form-label">Location *</label>
+    <input
+      type="text"
+      class="form-control"
+      id="location"
+      formControlName="location"
+      [ngClass]="{ 'is-invalid': submitted && f['location'].errors }"
+    >
+    <div *ngIf="submitted && f['location'].errors" class="invalid-feedback">
+      Location is required
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="image" class="form-label">Image URL</label>
+    <input
+      type="text"
+      class="form-control"
+      id="image"
+      placeholder="https://..."
+      formControlName="image"
+    >
+    <small class="form-text text-muted">Leave empty for default placeholder image</small>
+  </div>
+
+  <div class="d-flex gap-2">
+    <button type="submit" class="btn btn-primary">{{ event ? 'Update Event' : 'Add Event' }}</button>
+    <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancel</button>
+  </div>
+</form>

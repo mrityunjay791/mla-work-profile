@@ -1,0 +1,80 @@
+<div class="container py-5">
+  <h1 class="mb-5">Admin Dashboard</h1>
+
+  <div class="row mb-5">
+    <div class="col-md-4 mb-3">
+      <div class="stat-card">
+        <div class="stat-icon">📝</div>
+        <h3>{{ workCount }}</h3>
+        <p>Works</p>
+        <a routerLink="/admin/work" class="btn btn-sm btn-primary">Manage</a>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <div class="stat-card">
+        <div class="stat-icon">📅</div>
+        <h3>{{ eventCount }}</h3>
+        <p>Total Events</p>
+        <a routerLink="/admin/events" class="btn btn-sm btn-primary">Manage</a>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <div class="stat-card">
+        <div class="stat-icon">⏰</div>
+        <h3>{{ upcomingEventCount }}</h3>
+        <p>Upcoming Events</p>
+        <a routerLink="/admin/events" class="btn btn-sm btn-primary">View</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-8">
+      <div class="card border-0 shadow-sm">
+        <div class="card-header bg-primary text-white">
+          <h5 class="mb-0">Quick Actions</h5>
+        </div>
+        <div class="card-body">
+          <ul class="list-unstyled">
+            <li class="mb-3">
+              <a routerLink="/admin/work" class="action-link">
+                <i class="bi bi-plus-circle"></i> Add New Work
+              </a>
+            </li>
+            <li class="mb-3">
+              <a routerLink="/admin/events" class="action-link">
+                <i class="bi bi-plus-circle"></i> Add New Event
+              </a>
+            </li>
+            <li>
+              <a routerLink="/work" class="action-link">
+                <i class="bi bi-eye"></i> View Public Works
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4">
+      <div class="card border-0 shadow-sm">
+        <div class="card-header bg-info text-white">
+          <h5 class="mb-0">Admin Info</h5>
+        </div>
+        <div class="card-body">
+          <p class="mb-2">
+            <strong>Role:</strong> Administrator
+          </p>
+          <p class="mb-2">
+            <strong>Permissions:</strong> Full Access
+          </p>
+          <p class="mb-0">
+            <strong>Status:</strong> Active
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

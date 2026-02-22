@@ -1,0 +1,54 @@
+<div class="login-container">
+  <div class="login-card">
+    <h2 class="text-center mb-4">Admin Login</h2>
+
+    <div *ngIf="error" class="alert alert-danger" role="alert">
+      {{ error }}
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="submit()">
+      <div class="mb-3">
+        <label for="email" class="form-label">Email Address</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          placeholder="Enter your email"
+          formControlName="email"
+          [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"
+        >
+        <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+          <div *ngIf="f['email'].errors['required']">Email is required</div>
+          <div *ngIf="f['email'].errors['email']">Enter a valid email</div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          placeholder="Enter your password"
+          formControlName="password"
+          [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"
+        >
+        <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+          <div *ngIf="f['password'].errors['required']">Password is required</div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100" [disabled]="loading">
+        <span *ngIf="!loading">Login</span>
+        <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
+        <span *ngIf="loading">Logging in...</span>
+      </button>
+    </form>
+
+    <div class="mt-4 p-3 bg-light rounded text-center">
+      <p class="text-muted mb-2"><small>Demo Credentials:</small></p>
+      <p class="text-muted mb-0"><small>Email: <strong>admin@example.com</strong></small></p>
+      <p class="text-muted"><small>Password: <strong>any password</strong></small></p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,38 @@
+.d-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.table {
+  margin-bottom: 0;
+
+  thead {
+    th {
+      font-weight: 600;
+      color: #333;
+      border-bottom: 2px solid #dee2e6;
+    }
+  }
+
+  tbody tr {
+    &:hover {
+      background-color: #f8f9fa;
+    }
+
+    td {
+      vertical-align: middle;
+      padding: 1rem;
+    }
+  }
+}
+
+.btn-sm {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
+}
+
+.badge {
+  padding: 0.4rem 0.6rem;
+  font-size: 0.8rem;
+}

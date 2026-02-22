@@ -1,0 +1,26 @@
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.nav-link {
+  margin-left: 1rem;
+
+  &.active {
+    color: #fff !important;
+    text-decoration: underline;
+  }
+}
+
+.dropdown-menu-end {
+  right: 0;
+  left: auto;
+}
+
+.dropdown-item {
+  cursor: pointer;
+
+  &:hover {
+    background-color: #f8f9fa;
+  }
+}

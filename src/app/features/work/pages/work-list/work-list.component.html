@@ -1,0 +1,34 @@
+<div class="container py-5">
+  <h1 class="mb-5">Works & Achievements</h1>
+
+  <app-work-filter (filterChange)="onFilterChange($event)"></app-work-filter>
+
+  <div class="row">
+    <div class="col-12">
+      <p class="text-muted" *ngIf="filteredWorks.length === 0">No works found matching your criteria.</p>
+
+      <div class="work-list">
+        <div class="work-card mb-4" *ngFor="let work of filteredWorks">
+          <div class="card h-100 border-0 shadow-sm">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-start mb-3">
+                <h5 class="card-title mb-0">{{ work.title }}</h5>
+                <span class="badge bg-primary">{{ work.category }}</span>
+              </div>
+              <p class="card-text text-muted">{{ work.description }}</p>
+              <div class="work-meta mb-3">
+                <small class="text-muted">
+                  <i class="bi bi-calendar"></i> {{ formatDate(work.date) }}
+                </small>
+              </div>
+              <p class="impact-text">
+                <strong>Impact:</strong> {{ work.impact }}
+              </p>
+              <a [routerLink]="'/work/' + work.id" class="btn btn-sm btn-outline-primary">View Details</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,93 @@
+<form [formGroup]="workForm" (ngSubmit)="onSubmit()" class="work-form">
+  <div class="mb-3">
+    <label for="title" class="form-label">Title *</label>
+    <input
+      type="text"
+      class="form-control"
+      id="title"
+      formControlName="title"
+      [ngClass]="{ 'is-invalid': submitted && f['title'].errors }"
+    >
+    <div *ngIf="submitted && f['title'].errors" class="invalid-feedback">
+      Title is required
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="description" class="form-label">Description *</label>
+    <textarea
+      class="form-control"
+      id="description"
+      rows="3"
+      formControlName="description"
+      [ngClass]="{ 'is-invalid': submitted && f['description'].errors }"
+    ></textarea>
+    <div *ngIf="submitted && f['description'].errors" class="invalid-feedback">
+      Description is required
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label for="category" class="form-label">Category *</label>
+      <input
+        type="text"
+        class="form-control"
+        id="category"
+        placeholder="e.g., Education, Healthcare"
+        formControlName="category"
+        [ngClass]="{ 'is-invalid': submitted && f['category'].errors }"
+      >
+      <div *ngIf="submitted && f['category'].errors" class="invalid-feedback">
+        Category is required
+      </div>
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <label for="date" class="form-label">Date *</label>
+      <input
+        type="date"
+        class="form-control"
+        id="date"
+        formControlName="date"
+        [ngClass]="{ 'is-invalid': submitted && f['date'].errors }"
+      >
+      <div *ngIf="submitted && f['date'].errors" class="invalid-feedback">
+        Date is required
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="impact" class="form-label">Impact *</label>
+    <textarea
+      class="form-control"
+      id="impact"
+      rows="2"
+      formControlName="impact"
+      [ngClass]="{ 'is-invalid': submitted && f['impact'].errors }"
+    ></textarea>
+    <div *ngIf="submitted && f['impact'].errors" class="invalid-feedback">
+      Impact is required
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="details" class="form-label">Details *</label>
+    <textarea
+      class="form-control"
+      id="details"
+      rows="4"
+      formControlName="details"
+      [ngClass]="{ 'is-invalid': submitted && f['details'].errors }"
+    ></textarea>
+    <div *ngIf="submitted && f['details'].errors" class="invalid-feedback">
+      Details are required
+    </div>
+  </div>
+
+  <div class="d-flex gap-2">
+    <button type="submit" class="btn btn-primary">{{ work ? 'Update Work' : 'Add Work' }}</button>
+    <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancel</button>
+  </div>
+</form>

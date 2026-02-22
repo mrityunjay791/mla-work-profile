@@ -1,0 +1,72 @@
+<div class="container py-5">
+  <h1 class="mb-4">About</h1>
+
+  <div class="row" *ngIf="mlaProfile">
+    <div class="col-lg-8">
+      <section class="mb-5">
+        <h2>Biography</h2>
+        <p class="lead">{{ mlaProfile.bio }}</p>
+      </section>
+
+      <section class="mb-5">
+        <h2>Education</h2>
+        <ul class="list-unstyled">
+          <li *ngFor="let edu of mlaProfile.education" class="mb-3">
+            <div class="education-item p-3 bg-light rounded">
+              <i class="bi bi-book"></i> {{ edu }}
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <section class="mb-5">
+        <h2>Experience</h2>
+        <ul class="list-unstyled">
+          <li *ngFor="let exp of mlaProfile.experience" class="mb-3">
+            <div class="experience-item p-3 bg-light rounded">
+              <i class="bi bi-briefcase"></i> {{ exp }}
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <section class="mb-5">
+        <h2>Achievements</h2>
+        <ul class="list-unstyled">
+          <li *ngFor="let achievement of mlaProfile.achievements" class="mb-3">
+            <div class="achievement-item p-3 bg-success bg-opacity-10 rounded border-start border-success">
+              <i class="bi bi-award"></i> {{ achievement }}
+            </div>
+          </li>
+        </ul>
+      </section>
+    </div>
+
+    <div class="col-lg-4">
+      <div class="contact-card p-4 bg-light rounded sticky-top">
+        <h3>Contact Information</h3>
+        <hr>
+        <p class="mb-3">
+          <strong>Name:</strong><br>
+          {{ mlaProfile.name }}
+        </p>
+        <p class="mb-3">
+          <strong>Constituency:</strong><br>
+          {{ mlaProfile.constituency }}
+        </p>
+        <p class="mb-3">
+          <strong>Email:</strong><br>
+          <a href="mailto:{{ mlaProfile.email }}">{{ mlaProfile.email }}</a>
+        </p>
+        <p class="mb-3">
+          <strong>Phone:</strong><br>
+          <a href="tel:{{ mlaProfile.phone }}">{{ mlaProfile.phone }}</a>
+        </p>
+        <p class="mb-0">
+          <strong>Address:</strong><br>
+          {{ mlaProfile.address }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
