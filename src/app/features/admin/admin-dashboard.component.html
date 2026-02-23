@@ -1,0 +1,65 @@
+<div class="admin-dashboard-container">
+  <!-- Admin Header -->
+  <div class="admin-header">
+    <div class="header-left">
+      <h1>
+        <i class="bi bi-shield-check"></i>
+        Admin Dashboard
+      </h1>
+    </div>
+
+    <div class="header-right">
+      <div class="user-info">
+        <i class="bi bi-person-circle"></i>
+        <span class="username">{{ username }}</span>
+      </div>
+      <button class="btn btn-outline-danger btn-sm" (click)="logout()">
+        <i class="bi bi-box-arrow-right me-2"></i>
+        Logout
+      </button>
+    </div>
+  </div>
+
+  <!-- Tab Navigation -->
+  <div class="admin-tabs">
+    <nav class="nav nav-tabs" role="tablist">
+      <button
+        class="nav-link"
+        [class.active]="activeTab() === 'work'"
+        (click)="setActiveTab('work')"
+        role="tab"
+        [attr.aria-selected]="activeTab() === 'work'"
+        aria-controls="work-tab"
+      >
+        <i class="bi bi-briefcase me-2"></i>
+        Manage Work
+      </button>
+      <button
+        class="nav-link"
+        [class.active]="activeTab() === 'events'"
+        (click)="setActiveTab('events')"
+        role="tab"
+        [attr.aria-selected]="activeTab() === 'events'"
+        aria-controls="events-tab"
+      >
+        <i class="bi bi-calendar-event me-2"></i>
+        Manage Events
+      </button>
+    </nav>
+  </div>
+
+  <!-- Tab Content -->
+  <div class="admin-content">
+    @if (activeTab() === 'work') {
+      <div id="work-tab" role="tabpanel" class="tab-pane fade show active">
+        <app-manage-work></app-manage-work>
+      </div>
+    }
+
+    @if (activeTab() === 'events') {
+      <div id="events-tab" role="tabpanel" class="tab-pane fade show active">
+        <app-manage-events></app-manage-events>
+      </div>
+    }
+  </div>
+</div>

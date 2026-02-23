@@ -1,0 +1,321 @@
+<div class="events-page-container">
+  <!-- Header Section -->
+  <div class="events-header">
+    <h1>Events</h1>
+    <p class="text-muted">Stay updated with our latest events and initiatives</p>
+  </div>
+
+  <!-- Filter Section -->
+  <div class="filter-section">
+    <form [formGroup]="filterForm" class="filter-form">
+      <div class="row g-3 align-items-center">
+        <!-- Filter Type Tabs -->
+        <div class="col-12 col-md-8">
+          <div class="btn-group filter-tabs" role="group" aria-label="Filter events by type">
+            <button
+              type="button"
+              class="btn filter-btn"
+              [class.active]="filterType() === 'upcoming'"
+              (click)="setFilterType('upcoming')"
+              [attr.aria-pressed]="filterType() === 'upcoming'"
+            >
+              <i class="bi bi-calendar-event me-2"></i>
+              Upcoming <span class="badge">{{ upcomingCount() }}</span>
+            </button>
+            <button
+              type="button"
+              class="btn filter-btn"
+              [class.active]="filterType() === 'past'"
+              (click)="setFilterType('past')"
+              [attr.aria-pressed]="filterType() === 'past'"
+            >
+              <i class="bi bi-calendar-check me-2"></i>
+              Past <span class="badge">{{ pastCount() }}</span>
+            </button>
+            <button
+              type="button"
+              class="btn filter-btn"
+              [class.active]="filterType() === 'all'"
+              (click)="setFilterType('all')"
+              [attr.aria-pressed]="filterType() === 'all'"
+            >
+              <i class="bi bi-calendar me-2"></i>
+              All Events
+            </button>
+          </div>
+        </div>
+
+        <!-- Month Filter Dropdown -->
+        <div class="col-12 col-md-4">
+          <select
+            id="monthFilter"
+            class="form-select"
+            formControlName="month"
+            [attr.aria-label]="'Filter events by month'"
+          >
+            <option value="">All Months</option>
+            @for (month of months; track month.value) {
+              <option [value]="month.value">{{ month.label }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <!-- Reset Filter Button -->
+      @if (selectedMonth()) {
+        <div class="row mt-2">
+          <div class="col-12">
+            <button
+              type="button"
+              class="btn btn-sm btn-outline-secondary"
+              (click)="resetFilters()"
+              aria-label="Reset all filters"
+            >
+              <i class="bi bi-x-circle me-1"></i>
+              Reset Filters
+            </button>
+          </div>
+        </div>
+      }
+    </form>
+  </div>
+
+  <!-- Loading State -->
+  @if (isLoading()) {
+    <div class="text-center py-5">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading events...</span>
+      </div>
+      <p class="mt-2 text-muted">Loading events...</p>
+    </div>
+  } @else {
+    <!-- Events Grid -->
+    @if (displayedEvents().length > 0) {
+      <div class="events-section">
+        <!-- Category Label -->
+        <div class="category-label">
+          @switch (filterType()) {
+            @case ('upcoming') {
+              <h3>
+                <i class="bi bi-calendar-event"></i>
+                Upcoming Events
+              </h3>
+            }
+            @case ('past') {
+              <h3>
+                <i class="bi bi-calendar-check"></i>
+                Past Events
+              </h3>
+            }
+            @default {
+              <h3>
+                <i class="bi bi-calendar"></i>
+                All Events
+              </h3>
+            }
+          }
+        </div>
+
+        <!-- Events Grid -->
+        <div class="row g-4">
+          @for (event of displayedEvents(); track event.id) {
+            <div class="col-md-6 col-lg-4">
+              <div
+                class="card event-card h-100 shadow-sm"
+                [class.upcoming-event]="isFutureEvent(event.eventDate)"
+              >
+                <!-- Card Image -->
+                <div class="event-card-image-wrapper">
+                  <img
+                    [ngSrc]="event.bannerUrl"
+                    alt="{{ event.title }}"
+                    class="card-img-top event-card-image"
+                    width="100"
+                    height="200"
+                    priority
+                  />
+
+                  <!-- Date Badge -->
+                  <div class="event-date-badge">
+                    <div class="date-day">{{ getDayOfMonth(event.eventDate) }}</div>
+                    <div class="date-month">{{ getMonthAbbrv(event.eventDate) }}</div>
+                    <div class="date-year">{{ getYear(event.eventDate) }}</div>
+                  </div>
+
+                  <!-- Event Type Badge -->
+                  @if (isFutureEvent(event.eventDate)) {
+                    <span class="badge badge-upcoming">
+                      <i class="bi bi-clock"></i> Upcoming
+                    </span>
+                  } @else {
+                    <span class="badge badge-past">
+                      <i class="bi bi-check-circle"></i> Past
+                    </span>
+                  }
+                </div>
+
+                <!-- Card Body -->
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title event-card-title">
+                    {{ event.title }}
+                  </h5>
+
+                  <!-- Meta Information -->
+                  <div class="event-meta mb-2">
+                    <div class="meta-item">
+                      <i class="bi bi-clock"></i>
+                      <small>{{ formatTime(event.eventDate) }}</small>
+                    </div>
+                    <div class="meta-item">
+                      <i class="bi bi-geo-alt"></i>
+                      <small>{{ event.venue }}</small>
+                    </div>
+                  </div>
+
+                  <!-- Description -->
+                  <p class="card-text text-muted event-card-description">
+                    {{ event.description }}
+                  </p>
+
+                  <!-- Organizer -->
+                  <div class="event-organizer mb-3">
+                    <small class="text-secondary">
+                      <i class="bi bi-person"></i>
+                      By {{ event.createdBy }}
+                    </small>
+                  </div>
+
+                  <!-- View Details Button -->
+                  <button
+                    class="btn btn-primary btn-sm mt-auto align-self-start"
+                    (click)="openEventModal(event)"
+                    [attr.aria-label]="'View details for ' + event.title"
+                  >
+                    <i class="bi bi-eye me-1"></i>
+                    View Details
+                  </button>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    } @else {
+      <!-- Empty State -->
+      <div class="empty-state text-center py-5">
+        @switch (filterType()) {
+          @case ('upcoming') {
+            <i class="bi bi-calendar-event display-1 text-muted"></i>
+            <h4 class="mt-3 text-muted">No Upcoming Events</h4>
+            <p class="text-muted">Stay tuned! More events are coming soon.</p>
+          }
+          @case ('past') {
+            <i class="bi bi-calendar-check display-1 text-muted"></i>
+            <h4 class="mt-3 text-muted">No Past Events Found</h4>
+            <p class="text-muted">No events found in this period.</p>
+          }
+          @default {
+            <i class="bi bi-calendar display-1 text-muted"></i>
+            <h4 class="mt-3 text-muted">No Events Found</h4>
+            <p class="text-muted">No events match your filters.</p>
+          }
+        }
+        <button class="btn btn-outline-primary mt-3" (click)="resetFilters()">
+          <i class="bi bi-arrow-clockwise me-1"></i>
+          Reset Filters
+        </button>
+      </div>
+    }
+  }
+</div>
+
+<!-- Event Detail Modal -->
+@if (showModal() && selectedEvent()) {
+  <div
+    class="modal-overlay"
+    (click)="closeModal()"
+    role="dialog"
+    aria-modal="true"
+    [attr.aria-labelledby]="'modalTitle' + selectedEvent()!.id"
+  >
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <!-- Modal Header -->
+      <div class="modal-header d-flex justify-content-between align-items-center">
+        <h2 [id]="'modalTitle' + selectedEvent()!.id" class="modal-title">
+          {{ selectedEvent()!.title }}
+        </h2>
+        <button
+          type="button"
+          class="btn-close"
+          (click)="closeModal()"
+          aria-label="Close modal"
+        ></button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="modal-body">
+        <!-- Modal Image -->
+        <img
+          [ngSrc]="selectedEvent()!.bannerUrl"
+          alt="{{ selectedEvent()!.title }}"
+          class="img-fluid rounded mb-4 w-100"
+          width="400"
+          height="300"
+        />
+
+        <!-- Modal Details -->
+        <div class="modal-details">
+          <!-- Date and Time -->
+          <div class="detail-item">
+            <label class="detail-label">
+              <i class="bi bi-calendar-event"></i>
+              Date & Time
+            </label>
+            <p class="detail-value">
+              {{ formatDate(selectedEvent()!.eventDate) }} at
+              {{ formatTime(selectedEvent()!.eventDate) }}
+            </p>
+          </div>
+
+          <!-- Venue -->
+          <div class="detail-item">
+            <label class="detail-label">
+              <i class="bi bi-geo-alt"></i>
+              Venue
+            </label>
+            <p class="detail-value">{{ selectedEvent()!.venue }}</p>
+          </div>
+
+          <!-- Organizer -->
+          <div class="detail-item">
+            <label class="detail-label">
+              <i class="bi bi-person"></i>
+              Organized By
+            </label>
+            <p class="detail-value">{{ selectedEvent()!.createdBy }}</p>
+          </div>
+
+          <!-- Description -->
+          <div class="detail-item">
+            <label class="detail-label">
+              <i class="bi bi-file-text"></i>
+              Description
+            </label>
+            <p class="detail-value">{{ selectedEvent()!.description }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="modal-footer">
+        <button class="btn btn-secondary" (click)="closeModal()">
+          Close
+        </button>
+        <button class="btn btn-primary" disabled title="Registration coming soon">
+          <i class="bi bi-check2-circle me-1"></i>
+          Register (Coming Soon)
+        </button>
+      </div>
+    </div>
+  </div>
+}

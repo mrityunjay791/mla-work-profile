@@ -1,0 +1,318 @@
+<div class="manage-work-container">
+  <!-- Header -->
+  <div class="section-header">
+    <h2>
+      <i class="bi bi-briefcase"></i>
+      Manage Work Items
+    </h2>
+    <button
+      class="btn btn-primary"
+      (click)="toggleForm()"
+      [class.btn-secondary]="showForm()"
+    >
+      @if (!showForm()) {
+        <i class="bi bi-plus-circle me-2"></i>
+        Add New Work
+      } @else {
+        <i class="bi bi-x-circle me-2"></i>
+        Cancel
+      }
+    </button>
+  </div>
+
+  <!-- Messages -->
+  @if (successMessage()) {
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <i class="bi bi-check-circle me-2"></i>
+      {{ successMessage() }}
+      <button
+        type="button"
+        class="btn-close"
+        (click)="successMessage.set('')"
+        aria-label="Close"
+      ></button>
+    </div>
+  }
+
+  @if (errorMessage()) {
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <i class="bi bi-exclamation-triangle me-2"></i>
+      {{ errorMessage() }}
+      <button
+        type="button"
+        class="btn-close"
+        (click)="errorMessage.set('')"
+        aria-label="Close"
+      ></button>
+    </div>
+  }
+
+  <!-- Form Section -->
+  @if (showForm()) {
+    <div class="form-section">
+      <h4>
+        @if (editingId()) {
+          <i class="bi bi-pencil-square"></i>
+          Edit Work Item
+        } @else {
+          <i class="bi bi-file-earmark-plus"></i>
+          Create New Work Item
+        }
+      </h4>
+
+      <form [formGroup]="workForm" (ngSubmit)="onSubmit()" class="work-form">
+        <div class="row g-3">
+          <!-- Vidhansabha -->
+          <div class="col-md-6">
+            <label for="vidhansabha" class="form-label">Vidhansabha</label>
+            <select
+              id="vidhansabha"
+              class="form-select"
+              formControlName="vidhansabha"
+              [class.is-invalid]="workForm.get('vidhansabha')?.invalid && workForm.get('vidhansabha')?.touched"
+            >
+              <option value="">Select Vidhansabha</option>
+              @for (vb of vidhansabhas(); track vb.id) {
+                <option [value]="vb.id">{{ vb.name }}</option>
+              }
+            </select>
+          </div>
+
+          <!-- Panchayat -->
+          <div class="col-md-6">
+            <label for="panchayat" class="form-label">Panchayat</label>
+            <select
+              id="panchayat"
+              class="form-select"
+              formControlName="panchayat"
+              [disabled]="panchayats().length === 0"
+              [class.is-invalid]="workForm.get('panchayat')?.invalid && workForm.get('panchayat')?.touched"
+            >
+              <option value="">Select Panchayat</option>
+              @for (p of panchayats(); track p.id) {
+                <option [value]="p.id">{{ p.name }}</option>
+              }
+            </select>
+          </div>
+
+          <!-- Ward -->
+          <div class="col-md-6">
+            <label for="ward" class="form-label">Ward</label>
+            <select
+              id="ward"
+              class="form-select"
+              formControlName="ward"
+              [disabled]="wards().length === 0"
+              [class.is-invalid]="workForm.get('ward')?.invalid && workForm.get('ward')?.touched"
+            >
+              <option value="">Select Ward</option>
+              @for (w of wards(); track w.id) {
+                <option [value]="w.id">{{ w.name }}</option>
+              }
+            </select>
+          </div>
+
+          <!-- Title -->
+          <div class="col-md-6">
+            <label for="title" class="form-label">Title</label>
+            <input
+              type="text"
+              class="form-control"
+              id="title"
+              placeholder="Work title"
+              formControlName="title"
+              [class.is-invalid]="workForm.get('title')?.invalid && workForm.get('title')?.touched"
+            />
+            @if (workForm.get('title')?.invalid && workForm.get('title')?.touched) {
+              <div class="invalid-feedback">
+                @if (workForm.get('title')?.errors?.['required']) {
+                  Title is required
+                }
+                @if (workForm.get('title')?.errors?.['minlength']) {
+                  Title must be at least 3 characters
+                }
+              </div>
+            }
+          </div>
+
+          <!-- Description -->
+          <div class="col-12">
+            <label for="description" class="form-label">Description</label>
+            <textarea
+              class="form-control"
+              id="description"
+              placeholder="Work description"
+              rows="3"
+              formControlName="description"
+              [class.is-invalid]="workForm.get('description')?.invalid && workForm.get('description')?.touched"
+            ></textarea>
+            @if (workForm.get('description')?.invalid && workForm.get('description')?.touched) {
+              <div class="invalid-feedback">
+                @if (workForm.get('description')?.errors?.['required']) {
+                  Description is required
+                }
+                @if (workForm.get('description')?.errors?.['minlength']) {
+                  Description must be at least 10 characters
+                }
+              </div>
+            }
+          </div>
+
+          <!-- Image URL -->
+          <div class="col-12">
+            <label for="imageUrl" class="form-label">Image URL</label>
+            <input
+              type="url"
+              class="form-control"
+              id="imageUrl"
+              placeholder="https://example.com/image.jpg"
+              formControlName="imageUrl"
+              [class.is-invalid]="workForm.get('imageUrl')?.invalid && workForm.get('imageUrl')?.touched"
+            />
+          </div>
+
+          <!-- Date -->
+          <div class="col-md-6">
+            <label for="date" class="form-label">Date</label>
+            <input
+              type="date"
+              class="form-control"
+              id="date"
+              formControlName="date"
+              [class.is-invalid]="workForm.get('date')?.invalid && workForm.get('date')?.touched"
+            />
+          </div>
+
+          <!-- Location -->
+          <div class="col-md-6">
+            <label for="location" class="form-label">Location</label>
+            <input
+              type="text"
+              class="form-control"
+              id="location"
+              placeholder="Location"
+              formControlName="location"
+              [class.is-invalid]="workForm.get('location')?.invalid && workForm.get('location')?.touched"
+            />
+          </div>
+
+          <!-- Submit Button -->
+          <div class="col-12">
+            <button
+              type="submit"
+              class="btn btn-primary"
+              [disabled]="isSubmitting() || workForm.invalid"
+            >
+              @if (!isSubmitting()) {
+                <i class="bi bi-check-circle me-2"></i>
+                @if (editingId()) {
+                  Update Work
+                } @else {
+                  Create Work
+                }
+              } @else {
+                <span class="spinner-border spinner-border-sm me-2"></span>
+                Saving...
+              }
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-secondary ms-2"
+              (click)="resetForm()"
+            >
+              <i class="bi bi-arrow-clockwise me-2"></i>
+              Reset
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  }
+
+  <!-- Work Items List -->
+  @if (workItems().length > 0) {
+    <div class="list-section">
+      <h4>Work Items List</h4>
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Location</th>
+              <th>Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (item of displayedWorkItems(); track item.id) {
+              <tr>
+                <td>
+                  <strong>{{ item.title }}</strong>
+                  <br>
+                  <small class="text-muted">{{ item.description | slice: 0: 50 }}...</small>
+                </td>
+                <td>{{ item.location }}</td>
+                <td>{{ item.date | date: 'short' }}</td>
+                <td>
+                  <button
+                    class="btn btn-sm btn-outline-primary"
+                    (click)="editWork(item)"
+                    title="Edit"
+                  >
+                    <i class="bi bi-pencil"></i>
+                  </button>
+                  <button
+                    class="btn btn-sm btn-outline-danger ms-1"
+                    (click)="deleteWork(item.id)"
+                    title="Delete"
+                  >
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Pagination -->
+      @if (totalPages() > 1) {
+        <nav class="mt-3">
+          <ul class="pagination justify-content-center">
+            <li class="page-item" [class.disabled]="currentPage() === 1">
+              <button class="page-link" (click)="previousPage()" [disabled]="currentPage() === 1">
+                <i class="bi bi-chevron-left"></i> Previous
+              </button>
+            </li>
+            @for (page of [].constructor(totalPages()); let i = $index; track i) {
+              <li class="page-item" [class.active]="currentPage() === i + 1">
+                <button
+                  class="page-link"
+                  (click)="currentPage.set(i + 1)"
+                >
+                  {{ i + 1 }}
+                </button>
+              </li>
+            }
+            <li class="page-item" [class.disabled]="currentPage() === totalPages()">
+              <button class="page-link" (click)="nextPage()" [disabled]="currentPage() === totalPages()">
+                Next <i class="bi bi-chevron-right"></i>
+              </button>
+            </li>
+          </ul>
+        </nav>
+      }
+    </div>
+  } @else {
+    @if (!isLoadingWorkItems()) {
+      <div class="empty-state">
+        <i class="bi bi-inbox"></i>
+        <p>No work items yet</p>
+        <button class="btn btn-primary" (click)="toggleForm()">
+          <i class="bi bi-plus-circle me-2"></i>
+          Create First Work Item
+        </button>
+      </div>
+    }
+  }
+</div>
