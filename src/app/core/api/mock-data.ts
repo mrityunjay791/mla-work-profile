@@ -54,11 +54,32 @@ export const mockWards: Ward[] = [
 
   // For Koramangala Panchayat (id: 5)
   { id: 10, panchayatId: 5, vidhansabhaId: 2, name: 'Ward 10 - Koramangala North', wardNumber: 10 },
-  { id: 11, panchayatId: 5, vidhansabhaId: 2, name: 'Ward 11 - Koramangala South', wardNumber: 11 }
+  { id: 11, panchayatId: 5, vidhansabhaId: 2, name: 'Ward 11 - Koramangala South', wardNumber: 11 },
+
+  // For Whitefield Panchayat (id: 6)
+  { id: 12, panchayatId: 6, vidhansabhaId: 2, name: 'Ward 12 - Whitefield East', wardNumber: 12 },
+  { id: 13, panchayatId: 6, vidhansabhaId: 2, name: 'Ward 13 - Whitefield West', wardNumber: 13 },
+
+  // For Yeshwanthpur Panchayat (id: 7)
+  { id: 14, panchayatId: 7, vidhansabhaId: 3, name: 'Ward 14 - Yeshwanthpur Main', wardNumber: 14 },
+  { id: 15, panchayatId: 7, vidhansabhaId: 3, name: 'Ward 15 - Yeshwanthpur South', wardNumber: 15 },
+
+  // For Sanjaynagar Panchayat (id: 8)
+  { id: 16, panchayatId: 8, vidhansabhaId: 3, name: 'Ward 16 - Sanjaynagar Center', wardNumber: 16 },
+  { id: 17, panchayatId: 8, vidhansabhaId: 3, name: 'Ward 17 - Sanjaynagar North', wardNumber: 17 },
+
+  // For Marathahalli Panchayat (id: 9)
+  { id: 18, panchayatId: 9, vidhansabhaId: 4, name: 'Ward 18 - Marathahalli East', wardNumber: 18 },
+  { id: 19, panchayatId: 9, vidhansabhaId: 4, name: 'Ward 19 - Marathahalli West', wardNumber: 19 },
+
+  // For Ramamurthy Nagar Panchayat (id: 10)
+  { id: 20, panchayatId: 10, vidhansabhaId: 4, name: 'Ward 20 - Ramamurthy Main', wardNumber: 20 },
+  { id: 21, panchayatId: 10, vidhansabhaId: 4, name: 'Ward 21 - Ramamurthy South', wardNumber: 21 }
 ];
 
 // Mock Work Items Data
 export const mockWorkItems: WorkItem[] = [
+  // Bangalore South - Jayanagar Panchayat
   {
     id: 1,
     vidhansabhaId: 1,
@@ -101,6 +122,21 @@ export const mockWorkItems: WorkItem[] = [
   {
     id: 4,
     vidhansabhaId: 1,
+    panchayatId: 1,
+    wardId: 3,
+    title: 'Footpath Renovation',
+    description:
+      'Renovation of pedestrian footpaths with interlocking tiles and proper slope for better accessibility.',
+    imageUrl:
+      'https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=500&h=300&fit=crop',
+    date: '2024-01-28',
+    location: 'Jayanagar North'
+  },
+
+  // Bangalore South - Basavanagudi Panchayat
+  {
+    id: 5,
+    vidhansabhaId: 1,
     panchayatId: 2,
     wardId: 4,
     title: 'Water Tank Installation',
@@ -112,7 +148,50 @@ export const mockWorkItems: WorkItem[] = [
     location: 'Basavanagudi East'
   },
   {
-    id: 5,
+    id: 6,
+    vidhansabhaId: 1,
+    panchayatId: 2,
+    wardId: 5,
+    title: 'Temple Renovation & Beautification',
+    description:
+      'Beautification of historic temple and its surrounding areas with improved landscaping and facilities.',
+    imageUrl:
+      'https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=500&h=300&fit=crop',
+    date: '2024-02-10',
+    location: 'Basavanagudi West'
+  },
+
+  // Bangalore South - Banashankari Panchayat
+  {
+    id: 7,
+    vidhansabhaId: 1,
+    panchayatId: 3,
+    wardId: 6,
+    title: 'Public Toilet Block Construction',
+    description:
+      'Construction of modern public toilet facility with water and sanitation features for community hygiene.',
+    imageUrl:
+      'https://images.unsplash.com/photo-1587293852591-21c3f81db831?w=500&h=300&fit=crop',
+    date: '2024-02-15',
+    location: 'Banashankari Main'
+  },
+  {
+    id: 8,
+    vidhansabhaId: 1,
+    panchayatId: 3,
+    wardId: 7,
+    title: 'Rainwater Harvesting System',
+    description:
+      'Installation of rainwater harvesting systems in all government buildings for sustainable water management.',
+    imageUrl:
+      'https://images.unsplash.com/photo-1559211615-cd4628902249?w=500&h=300&fit=crop',
+    date: '2024-03-01',
+    location: 'Banashankari South'
+  },
+
+  // Bangalore Central - Indiranagar Panchayat
+  {
+    id: 9,
     vidhansabhaId: 2,
     panchayatId: 4,
     wardId: 8,
@@ -125,7 +204,22 @@ export const mockWorkItems: WorkItem[] = [
     location: 'Indiranagar East'
   },
   {
-    id: 6,
+    id: 10,
+    vidhansabhaId: 2,
+    panchayatId: 4,
+    wardId: 9,
+    title: 'Market Renovation Project',
+    description:
+      'Renovation and modernization of community market with proper stalls, storage, and hygiene standards.',
+    imageUrl:
+      'https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=500&h=300&fit=crop',
+    date: '2024-03-15',
+    location: 'Indiranagar West'
+  },
+
+  // Bangalore Central - Koramangala Panchayat
+  {
+    id: 11,
     vidhansabhaId: 2,
     panchayatId: 5,
     wardId: 10,
@@ -138,30 +232,157 @@ export const mockWorkItems: WorkItem[] = [
     location: 'Koramangala North'
   },
   {
-    id: 7,
+    id: 12,
+    vidhansabhaId: 2,
+    panchayatId: 5,
+    wardId: 11,
+    title: 'Public Library Setup',
+    description:
+      'Establishment of community library with digital resources, reading area, and educational materials.',
+    imageUrl:
+      'https://images.unsplash.com/photo-1507842931343-583f20270319?w=500&h=300&fit=crop',
+    date: '2024-03-20',
+    location: 'Koramangala South'
+  },
+
+  // Bangalore Central - Whitefield Panchayat
+  {
+    id: 13,
+    vidhansabhaId: 2,
+    panchayatId: 6,
+    wardId: 12,
+    title: 'IT Park Infrastructure Development',
+    description:
+      'Development of infrastructure facilities for IT park with parking, roads, and utility connections.',
+    imageUrl:
+      'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=500&h=300&fit=crop',
+    date: '2024-02-18',
+    location: 'Whitefield East'
+  },
+  {
+    id: 14,
+    vidhansabhaId: 2,
+    panchayatId: 6,
+    wardId: 13,
+    title: 'Green Corridor Development',
+    description:
+      'Creation of green corridors along major roads with tree plantation and landscaping for environmental benefits.',
+    imageUrl:
+      'https://images.unsplash.com/photo-1516559828552-8e526c74b228?w=500&h=300&fit=crop',
+    date: '2024-03-12',
+    location: 'Whitefield West'
+  },
+
+  // Bangalore North - Yeshwanthpur Panchayat
+  {
+    id: 15,
     vidhansabhaId: 3,
     panchayatId: 7,
-    wardId: 12,
+    wardId: 14,
+    title: 'Industrial Area Road Development',
+    description:
+      'Development of main arterial roads in industrial area with proper loading zones and traffic management.',
+    imageUrl:
+      'https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=500&h=300&fit=crop',
+    date: '2024-02-22',
+    location: 'Yeshwanthpur Main'
+  },
+  {
+    id: 16,
+    vidhansabhaId: 3,
+    panchayatId: 7,
+    wardId: 15,
+    title: 'Worker Welfare Center',
+    description:
+      'Establishment of welfare center for industrial workers with rest area, health services, and training facilities.',
+    imageUrl:
+      'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=500&h=300&fit=crop',
+    date: '2024-03-08',
+    location: 'Yeshwanthpur South'
+  },
+
+  // Bangalore North - Sanjaynagar Panchayat
+  {
+    id: 17,
+    vidhansabhaId: 3,
+    panchayatId: 8,
+    wardId: 16,
     title: 'Waste Management System',
     description:
       'Implementation of modern waste segregation and management system with dedicated waste collection points.',
     imageUrl:
       'https://images.unsplash.com/photo-1559211615-cd4628902249?w=500&h=300&fit=crop',
     date: '2024-02-15',
-    location: 'Yeshwanthpur'
+    location: 'Sanjaynagar Center'
   },
   {
-    id: 8,
+    id: 18,
+    vidhansabhaId: 3,
+    panchayatId: 8,
+    wardId: 17,
+    title: 'Residential Complex Development',
+    description:
+      'Development of affordable housing complex with basic amenities and community spaces.',
+    imageUrl:
+      'https://images.unsplash.com/photo-1486174712556-0a0ead6d8895?w=500&h=300&fit=crop',
+    date: '2024-03-10',
+    location: 'Sanjaynagar North'
+  },
+
+  // Bangalore East - Marathahalli Panchayat
+  {
+    id: 19,
     vidhansabhaId: 4,
     panchayatId: 9,
-    wardId: 16,
+    wardId: 18,
     title: 'School Building Renovation',
     description:
       'Complete renovation of government school building with new classrooms, labs, and sports facilities.',
     imageUrl:
       'https://images.unsplash.com/photo-1427504494785-cddc0c6a3217?w=500&h=300&fit=crop',
     date: '2024-03-20',
-    location: 'Marathahalli'
+    location: 'Marathahalli East'
+  },
+  {
+    id: 20,
+    vidhansabhaId: 4,
+    panchayatId: 9,
+    wardId: 19,
+    title: 'Shopping Complex Development',
+    description:
+      'Development of community shopping complex with modern retail spaces and parking facilities.',
+    imageUrl:
+      'https://images.unsplash.com/photo-1555636222-cdc9651fda8d?w=500&h=300&fit=crop',
+    date: '2024-02-25',
+    location: 'Marathahalli West'
+  },
+
+  // Bangalore East - Ramamurthy Nagar Panchayat
+  {
+    id: 21,
+    vidhansabhaId: 4,
+    panchayatId: 10,
+    wardId: 20,
+    title: 'Senior Citizen Day Care Center',
+    description:
+      'Establishment of day care facility for senior citizens with medical support and recreational activities.',
+    imageUrl:
+      'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=500&h=300&fit=crop',
+    date: '2024-02-20',
+    location: 'Ramamurthy Main'
+  },
+  {
+    id: 22,
+    vidhansabhaId: 4,
+    panchayatId: 10,
+    wardId: 21,
+    title: 'Skills Training Center',
+    description:
+      'Vocational training center for youth providing skills in plumbing, electrical, and carpentry work.',
+    imageUrl:
+      'https://images.unsplash.com/photo-1427504494785-cddc0c6a3217?w=500&h=300&fit=crop',
+    date: '2024-03-18',
+    location: 'Ramamurthy South'
   }
 ];
 
